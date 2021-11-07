@@ -90,10 +90,11 @@ class App extends Component {
         <div className="row">
           <div className="col-lg-6 mx-auto">
             <div className="card card-body">
-
+              <h1 className="text-center">Currency Converter</h1>
+              <br/><br/>
               <h5>{amount} {base} is equivalent to</h5>
               <h2>{result === null ? '...' : result} {convertTo}</h2>
-
+              <br/>
               <div className="row">
                 <div className="col-sm-10">
                   <form className="form-inline mb-4">
