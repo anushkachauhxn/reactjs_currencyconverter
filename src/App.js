@@ -18,14 +18,39 @@ class App extends Component {
     this.setState({
       [e.target.name]: e.target.value,
       result: null
-    });
+    },
+    this.calculateResult
+    );
   }
 
   handleInput = (e) => {
     this.setState({
       amount: e.target.value,
       result: null
-    });
+    },
+    this.calculateResult
+    );
+  }
+
+  calculateResult = () => {
+    if (this.state.amount === isNaN) {
+        return;
+    } 
+    else {
+        fetch(`https://api.exchangeratesapi.io/latest?base=${this.state.base}`)
+        .then(res => res.json())
+        .then((data) => {
+            const date = data.date;
+            const result = (data.rates[this.state.convertTo] * this.state.amount).toFixed(4);
+            this.setState({
+              result,
+              date
+            });
+        })
+        .catch((err) => {
+            console.error('Error: ', err);
+        })
+    }
   }
 
   render() {
