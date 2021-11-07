@@ -21,14 +21,14 @@ class App extends Component {
         <div className="row">
           <div className="col-lg-6 mx-auto">
             <div className="card card-body">
-              <h5>1 USD is equivalent to</h5>
-              <h2>1.87 EUR</h2>
-              <p>As of 2019/1/2</p>
+              <h5>{amount} {base} is equivalent to</h5>
+              <h2>{result} {convertTo}</h2>
+              <p>As of {date}</p>
               <div className="row">
                 <div className="col-sm-10">
                   <form className="form-inline mb-4">
                     <input className="form-control form-control-lg mx-3" />
-                    <select className="form-control form-control-lg">
+                    <select name="base" value={base} className="form-control form-control-lg">
                       {currencies.map((currency) => {
                         <option key={currency} value={currency}>
                           {currency}
@@ -38,7 +38,7 @@ class App extends Component {
                   </form>
                   <form className="form-inline mb-4">
                     <input className="form-control form-control-lg mx-3" />
-                    <select className="form-control form-control-lg">
+                    <select name="convertTo" value={convertTo} className="form-control form-control-lg">
                       {currencies.map((currency) => {
                         <option key={currency} value={currency}>
                           {currency}
@@ -51,12 +51,11 @@ class App extends Component {
                 <div className="col-sm-2 align-self-center">
                   <h1 className="swap">&#8595;&#8593;</h1>
                 </div>
-              </div>
-            </div>
+              </div> {/* End of row */}
+            </div> {/* End of card */}
           </div>
         </div>
       </div>
-
     );
   }
 }
