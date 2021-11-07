@@ -71,6 +71,19 @@ class App extends Component {
     }
   }
 
+  handleSwap = (e) => {
+    const base = this.state.base;
+    const convertTo = this.state.convertTo;
+    e.preventDefault();
+    this.setState({
+      base: convertTo,
+      convertTo: base,
+      result: null
+    },
+    this.calculateResult
+    );
+  }
+
   render() {
     const { currencies, base, amount, convertTo, result, date } = this.state;
     return (
@@ -125,7 +138,7 @@ class App extends Component {
                 </div>
 
                 <div className="col-sm-2 align-self-center">
-                  <h1 className="swap">&#8595;&#8593;</h1>
+                  <h1 onClick={this.handleSwap} className="swap">&#8595;&#8593;</h1>
                 </div>
 
               </div> {/* End of row */}
