@@ -37,19 +37,37 @@ class App extends Component {
         return;
     } 
     else {
-        fetch(`https://api.exchangeratesapi.io/latest?base=${this.state.base}`)
-        .then(res => res.json())
-        .then((data) => {
-            const date = data.date;
-            const result = (data.rates[this.state.convertTo] * this.state.amount).toFixed(4);
-            this.setState({
-              result,
-              date
-            });
+      /* THIS API IS NO LONGER FREE
+      fetch(`https://api.exchangeratesapi.io/latest?base=${this.state.base}`)
+      .then(res => res.json())
+      .then((data) => {
+        const date = data.date;
+        const result = (data.rates[this.state.convertTo] * this.state.amount).toFixed(4);
+        this.setState({
+          result,
+          date
+        });
+      })
+      .catch((err) => {
+        console.error('Error: ', err);
+      })
+      */
+      fetch(`https://currency-exchange.p.rapidapi.com/exchange?to=${this.state.convertTo}&from=${this.state.base}`, {
+        "method": "GET",
+        "headers": {
+          "x-rapidapi-host": "currency-exchange.p.rapidapi.com",
+          "x-rapidapi-key": "6f091c3508msh3b56a5a642252cap1e0359jsncd5db2d44811"
+        }
+      })
+      .then(res => res.json())
+      .then((data) => {
+        // data is the exchange rate
+        console.log(data);
+        this.setState({
+          result: data * this.state.amount
         })
-        .catch((err) => {
-            console.error('Error: ', err);
-        })
+      })
+      .catch(err => console.error(err));
     }
   }
 
