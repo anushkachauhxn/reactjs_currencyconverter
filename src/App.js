@@ -14,6 +14,20 @@ class App extends Component {
     }
   }
 
+  handleSelect = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+      result: null
+    });
+  }
+
+  handleInput = (e) => {
+    this.setState({
+      amount: e.target.value,
+      result: null
+    });
+  }
+
   render() {
     const { currencies, base, amount, convertTo, result, date } = this.state;
     return (
@@ -21,14 +35,25 @@ class App extends Component {
         <div className="row">
           <div className="col-lg-6 mx-auto">
             <div className="card card-body">
+
               <h5>{amount} {base} is equivalent to</h5>
-              <h2>{result} {convertTo}</h2>
+              <h2>{result === null ? '...' : result} {convertTo}</h2>
               <p>As of {date}</p>
+
               <div className="row">
                 <div className="col-sm-10">
                   <form className="form-inline mb-4">
-                    <input className="form-control form-control-lg mx-3" />
-                    <select name="base" value={base} className="form-control form-control-lg">
+                    <input 
+                      type="number" 
+                      value={amount}
+                      onChange={this.handleInput}
+                      className="form-control form-control-lg mx-3" 
+                    />
+                    <select 
+                      name="base" value={base}
+                      onChange={this.handleSelect} 
+                      className="form-control form-control-lg"
+                    >
                       {currencies.map((currency) => {
                         <option key={currency} value={currency}>
                           {currency}
@@ -36,9 +61,17 @@ class App extends Component {
                       })}
                     </select>
                   </form>
+
                   <form className="form-inline mb-4">
-                    <input className="form-control form-control-lg mx-3" />
-                    <select name="convertTo" value={convertTo} className="form-control form-control-lg">
+                    <input 
+                      disabled={true}
+                      value={result === null ? 'Calculating...' : result}
+                      className="form-control form-control-lg mx-3" 
+                    />
+                    <select name="convertTo" value={convertTo} 
+                      onChange={this.handleSelect}
+                      className="form-control form-control-lg"
+                    >
                       {currencies.map((currency) => {
                         <option key={currency} value={currency}>
                           {currency}
@@ -51,6 +84,7 @@ class App extends Component {
                 <div className="col-sm-2 align-self-center">
                   <h1 className="swap">&#8595;&#8593;</h1>
                 </div>
+
               </div> {/* End of row */}
             </div> {/* End of card */}
           </div>
