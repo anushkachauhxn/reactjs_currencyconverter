@@ -15,6 +15,7 @@ class App extends Component {
   }
 
   render() {
+    const { currencies, base, amount, convertTo, result, date } = this.state;
     return (
       <div className="container my-5">
         <div className="row">
@@ -28,13 +29,21 @@ class App extends Component {
                   <form className="form-inline mb-4">
                     <input className="form-control form-control-lg mx-3" />
                     <select className="form-control form-control-lg">
-                      <option>Option 1</option>
+                      {currencies.map((currency) => {
+                        <option key={currency} value={currency}>
+                          {currency}
+                        </option>
+                      })}
                     </select>
                   </form>
                   <form className="form-inline mb-4">
                     <input className="form-control form-control-lg mx-3" />
                     <select className="form-control form-control-lg">
-                      <option>Option 1</option>
+                      {currencies.map((currency) => {
+                        <option key={currency} value={currency}>
+                          {currency}
+                        </option>
+                      })}
                     </select>
                   </form>
                 </div>
