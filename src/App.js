@@ -10,7 +10,6 @@ class App extends Component {
         amount: '',
         convertTo: 'EUR',
         result: '',
-        date: ''
     }
   }
 
@@ -85,7 +84,7 @@ class App extends Component {
   }
 
   render() {
-    const { currencies, base, amount, convertTo, result, date } = this.state;
+    const { currencies, base, amount, convertTo, result } = this.state;
     return (
       <div className="container my-5">
         <div className="row">
@@ -94,7 +93,6 @@ class App extends Component {
 
               <h5>{amount} {base} is equivalent to</h5>
               <h2>{result === null ? '...' : result} {convertTo}</h2>
-              <p>As of {date}</p>
 
               <div className="row">
                 <div className="col-sm-10">
@@ -110,11 +108,11 @@ class App extends Component {
                       onChange={this.handleSelect} 
                       className="form-control form-control-lg"
                     >
-                      {currencies.map((currency) => {
+                      {currencies.map((currency) => 
                         <option key={currency} value={currency}>
                           {currency}
                         </option>
-                      })}
+                      )}
                     </select>
                   </form>
 
@@ -128,11 +126,11 @@ class App extends Component {
                       onChange={this.handleSelect}
                       className="form-control form-control-lg"
                     >
-                      {currencies.map((currency) => {
+                      {currencies.map((currency) => 
                         <option key={currency} value={currency}>
                           {currency}
                         </option>
-                      })}
+                      )}
                     </select>
                   </form>
                 </div>
